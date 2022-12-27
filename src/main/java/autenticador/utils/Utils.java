@@ -1,5 +1,6 @@
 package autenticador.utils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,15 +47,31 @@ public class Utils {
     public static List<String> getList(String item1, String item2, String item3, String item4) {
         List<String> l = new ArrayList<>();
         l.add(item1);
-        if (item2 != "") {
+        if (!item2.equals("")) {
             l.add(item2);
-            if (item3 != "") {
+            if (!item3.equals("")) {
                 l.add(item3);
-                if (item4 != "") {
+                if (!item4.equals("")) {
                     l.add(item4);
                 }
             }
         }
         return l;
+    }
+
+    public static String int2Str(int i, int largo){
+        String s = Integer.toString(i);
+        while (s.length() < largo) {
+            s = '0' + s;
+        }
+        return s;
+    }
+
+    public static String date2YYYYMMAA(LocalDate dt){
+        return int2Str(dt.getYear(), 4) + int2Str(dt.getMonthValue(), 2) + int2Str(dt.getDayOfMonth(), 2) ;
+    }
+
+    public static String date2YYYYMMAA(LocalDateTime dt){
+        return date2YYYYMMAA(LocalDate.of(dt.getYear(), dt.getMonthValue(), dt.getDayOfMonth()));
     }
 }
